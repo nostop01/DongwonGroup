@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class ClearDetect : MonoBehaviour
 {
-    float speed;
     private void Update()
     {
 
@@ -17,11 +16,11 @@ public class ClearDetect : MonoBehaviour
         if(other.gameObject.tag==("Wall"))
         {
             Debug.Log("클리어");
+            StageClear();
         }
-        StageClear();
     }
     void StageClear()
     {
-
+        Debug.Log("애니메이션 출력 후 다음 스테이지로");
     }
 }
