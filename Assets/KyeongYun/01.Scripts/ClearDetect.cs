@@ -21,6 +21,6 @@ public class ClearDetect : MonoBehaviour
     }
     void StageClear()
     {
-        Debug.Log("애니메이션 출력 후 다음 스테이지로");
+        //
     }
 }
