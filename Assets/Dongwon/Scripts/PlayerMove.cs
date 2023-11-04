@@ -17,11 +17,12 @@ public class PlayerMove : MonoBehaviour
     public bool MovePosRight = false;
 
     public float LerpSpeed = 0.025f;
+    public float RotLerpSpeed = 0.5f;
 
     private float MoveDel = 0.35f; //움직임 쿨타임
     private float MoveDelCurrent = 0.35f; //움직임 쿨타임 적용 변수
 
-    Vector3 target;
+    public GameObject TrmPos;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class PlayerMove : MonoBehaviour
     void CheckPlayerPos()
     {
         //플레이어 위치 실시간 체크
-        if(transform.position.y <= 1.6) //아래쪽 위치 확인
+        if(transform.position.y <= TrmPos.transform.position.y - 3) //아래쪽 위치 확인
         {
             isPosDown = true;
             MovePosDown = false;
@@ -52,13 +53,13 @@ public class PlayerMove : MonoBehaviour
             isPosDown = false;
         }
 
-        if(transform.position.y == 4.5)
+        if(transform.position.y == TrmPos.transform.position.y)
         {
             MovePosDown = false;
             MovePosUp = false;
         }
 
-        if(transform.position.y >= 7.4) //위쪽 위치 확인
+        if(transform.position.y >= TrmPos.transform.position.y + 3) //위쪽 위치 확인
         {
             isPosUp = true;
             MovePosUp = false;
@@ -68,7 +69,7 @@ public class PlayerMove : MonoBehaviour
             isPosUp = false;
         }
 
-        if (transform.position.z >= 7.4) //왼쪽 위치 확인
+        if (transform.position.z >= TrmPos.transform.position.z + 3) //왼쪽 위치 확인
         {
             isPosLeft = true;
             MovePosLeft = false;
@@ -78,13 +79,13 @@ public class PlayerMove : MonoBehaviour
             isPosLeft = false;
         }
 
-        if (transform.position.z == 4.5)
+        if (transform.position.z == TrmPos.transform.position.z)
         {
             MovePosLeft = false;
             MovePosRight = false;
         }
 
-        if (transform.position.z <= 1.6) //오른쪽 위치 확인
+        if (transform.position.z <= TrmPos.transform.position.z - 3) //오른쪽 위치 확인
         {
             isPosRight = true;
             MovePosRight = false;
@@ -142,27 +143,44 @@ public class PlayerMove : MonoBehaviour
     {
         if (MovePosUp)
         {
-            target = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, target, LerpSpeed);
+
+            Quaternion targetRot = Quaternion.Euler(-25, 90, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed);
         }
 
         if (MovePosDown) 
         {
-            target = new Vector3(transform.position.x, transform.position.y - 3f, transform.position.z);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y - 3f, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, target, LerpSpeed);
-        }
 
+            Quaternion targetRot = Quaternion.Euler(25, 90, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed);
+        }
 
         if (MovePosLeft)
         {
-            target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3);
             transform.position = Vector3.Lerp(transform.position, target, LerpSpeed);
-        }     
+
+            Quaternion targetRot = Quaternion.Euler(0, 65, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed);
+        }
 
         if (MovePosRight)
         {
-            target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
             transform.position = Vector3.Lerp(transform.position, target, LerpSpeed);
+
+            Quaternion targetRot = Quaternion.Euler(0, 115, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed);
+        }
+
+        if (!MovePosRight && !MovePosDown && !MovePosUp && !MovePosLeft)
+        {
+            Quaternion targetRot = Quaternion.Euler(0, 90, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed);
         }
     }
 }
