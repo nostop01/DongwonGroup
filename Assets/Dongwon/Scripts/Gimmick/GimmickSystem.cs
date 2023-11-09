@@ -11,12 +11,15 @@ public class GimmickSystem : MonoBehaviour
 
     public int W_Lineidx = 0;
 
-    public bool PlayerNotMoving = false;
+    public bool PlayerNotMoving = false; //기믹시스템 스크립트에 있는 움직임 확인 boolean 변수
+    public bool PlayerStatus = false; //플레이어 상태 받아오기
+    public bool GamePause = false; //게임이 퍼즈상태인지 받아오기 위한 변수
 
     public GameObject Player;
     public GameObject[] WarningLineTrm; //각 숫자별 위치를 받아오기 위한 리스트
 
     PlayerMove _playerMove;
+    PlayerMoveForward _moveForward;
 
     Vector3 W_LineVec;
 
@@ -24,9 +27,10 @@ public class GimmickSystem : MonoBehaviour
     void Start()
     {
         SpawnWaringLineTimer = SpawnTime; //시작하고 타이머 설정
-        playerMoveTimer = playerMoveTime;
+        playerMoveTimer = playerMoveTime; 
 
         _playerMove = FindObjectOfType<PlayerMove>();
+        _moveForward = FindObjectOfType<PlayerMoveForward>();
     }
 
     // Update is called once per frame
@@ -34,10 +38,23 @@ public class GimmickSystem : MonoBehaviour
     {
         SpawnWaringLineTimer -= Time.deltaTime;
 
-        PlayerTrmCheck();
-        TenSecSpawnSpear();
+        PlayerNotMoving = _playerMove.IsNotMoving; //플레이어 무브 스크립트의 움직임 감지 boolean 변수값을 저장
+        PlayerStatus = _moveForward.Death; //플레이어가 죽음 상태인지 아닌지 감지
+        GamePause = _moveForward.Pause; //게임이 퍼즈인지 아닌지 확인
 
-        PlayerNotMoving = _playerMove.IsNotMoving;
+        if(!PlayerStatus) //플레이어가 Death 상태가 아닐 경우
+        {
+            if(!GamePause) //게임이 퍼즈가 아닐 경우
+            {
+                PlayerTrmCheck(); //플레이어가 제자리에서 5초동안 움직이지 않을경우 동작하는 함수
+                TenSecSpawnSpear(); //10초마다 동작하는 기믹 시스템 함수
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     void TenSecSpawnSpear() //10초마다 랜덤한 위치에 경고라인, 이후 창 생성
@@ -93,8 +110,6 @@ public class GimmickSystem : MonoBehaviour
             warningLineGo.transform.position = W_LineVec; //생성한 풀링 오브젝트의 포지션 설정
 
             SpawnWaringLineTimer = SpawnTime; //타이머 초기화
-
-            StartCoroutine(WaitTime(0.5f)); //0.5초 대기
         }
     }
 
@@ -103,27 +118,27 @@ public class GimmickSystem : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
-    void PlayerTrmCheck()
+    void PlayerTrmCheck() //플레이어가 움직이는지 아닌지 확인하고 동작하는 함수
     {
-        if(PlayerNotMoving)
+        if(PlayerNotMoving) //플레이어가 움직이지 않고 있다면
         {
-            playerMoveTimer -= Time.deltaTime;
+            playerMoveTimer -= Time.deltaTime; //타이머 동작
 
-            if(playerMoveTimer <= 0)
+            if(playerMoveTimer <= 0) //타이머가 0이 된다면
             {
-                var warningLineGo = ObjectPoolManager.instance.GetGo("WarningLine");
+                var warningLineGo = ObjectPoolManager.instance.GetGo("WarningLine"); //오브젝트 풀링
 
-                Vector3 getVel = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+                Vector3 getVel = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z); //풀링된 오브젝트에 제공할 위치 Vector 설정
 
-                warningLineGo.transform.position = getVel;
+                warningLineGo.transform.position = getVel; //벡터값에 따라 위치 설정
 
-                playerMoveTimer = playerMoveTime;
+                playerMoveTimer = playerMoveTime; //타이머 초기화
             }
         }
 
-        else if(!PlayerNotMoving)
+        else if(!PlayerNotMoving) //만약 플레이어가 움직인다면
         {
-            playerMoveTimer = playerMoveTime;
+            playerMoveTimer = playerMoveTime; //타이머 초기화
         }
     }
 }
