@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         gameOver,
         gameClear,
     }
-    public void Start()
+    public void Update()
     {
         //PlayerStatus 스크립트를 찾아 onDeath가 불러와진다면 GameOver(게임종료)
         //FindObjectOfType<PlayerStatus>().onDeath += GameOver;
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
         //PlayerStatus 스크립트를 찾아 StageClear 불러와진다면 StageClear(게임종료)
         //FindObjectOfType<PlayerStatus>().StageClear += StageClear;
     }
-
 
     public void GameOver()
     {
@@ -49,7 +48,7 @@ public class GameManager : MonoBehaviour
     }
     public void SceneLoad()
     {
-        // 현재 씬의 빌드 인덱스를 가져옴
+        // 현재 씬의 빌드 인덱스를 가져옴(레벨 씬 순서만 연속적으로 두면 될듯)
         int currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
         // 다음 씬의 빌드 인덱스를 계산하여 로드
