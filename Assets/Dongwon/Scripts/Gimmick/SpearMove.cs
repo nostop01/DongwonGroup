@@ -43,7 +43,8 @@ public class SpearMove : PoolAble
         if(other.gameObject.name == "Player") //플레이어 이름을 가진 오브젝트와 부딫힐 때
         {
             _moveForward.CanMove = false; //찾아둔 스크립트 컴포넌트의 CanMove를 false로
-            _moveForward._rigid.velocity = Vector3.zero; //오브젝트를 찾아둔 거기 때문에 오브젝트에 리지드바디의 벡터값을 0,0,0으로 변경(즉시 멈추게)
+            //_moveForward._rigid.velocity = Vector3.zero; //오브젝트를 찾아둔 거기 때문에 오브젝트에 리지드바디의 벡터값을 0,0,0으로 변경(즉시 멈추게)
+            _moveForward.OnDeath(); //창 기믹은 즉사 판정이기 때문에 OnDeath를 통해 죽었음을 전달.
         }
     }
 }

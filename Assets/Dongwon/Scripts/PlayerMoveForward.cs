@@ -8,8 +8,11 @@ public class PlayerMoveForward : MonoBehaviour
     public float CollideMoveSpeed = 4.5f; //충돌 시 움직이는 속도
     public float ableToMoveTimer = 0f; //원래 속도로 돌아가는 타이머
     public float ableToMoveTime = 2f; //타이머 기준
+
     public bool CanMove = true; //게임오버가 아닐 때, 게임이 끝나지 않았을 때 움직이도록 하는 변수
     public bool CollideObstacle = false; //오브젝트에 부딫혔는지 아닌지 확인하는 boolean변수
+    public bool Death = false; //플레이어 상태 확인하는 변수
+    public bool Pause = false; //게임오버, 게임이 끝났거나, 게임이 일시중지 되었을 때, 시작하기 전에 사용하는 변수
 
     public Rigidbody _rigid;
 
@@ -28,25 +31,14 @@ public class PlayerMoveForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CanMove) //움직일 수 있는 상태일때
+        if(!Death) //플레이어가 죽음상태가 아닐 때
         {
-            MoveFunction(); //다음 함수 실행
-        }
-
-        if(CollideObstacle) //오브젝트에 부딫혀 boolean 함수가 true 시
-        {
-            CollideMove(); //다음함수 실행
-        }
-
-        if (ableToMoveTimer <= 0f) //타이머가 0이 되면
-        {
-            CollideObstacle = false; //장애물 충돌 boolean 변수 끄기 
-
-            CanMove = true; //다시 움직일 수 있게 변경
-
-            _rigid.velocity = Vector3.zero; //속도를 바로 적용시키기 위해서 플레이어 리지드바디 벨로시티의 벡터값을 0,0,0으로 변경 후 
-
-            ableToMoveTimer = ableToMoveTime; //타이머 초기화
+            if(!Pause) //만약 퍼즈상태가 아니면
+            {
+                MoveFunction();  //기본적으로 이동하는 함수
+                CollideMove(); //충돌 시 이동하는 함수
+                ResetMoveVector(); //움직임 벡터 초기화하는 함수
+            }
         }
     }
 
@@ -72,7 +64,7 @@ public class PlayerMoveForward : MonoBehaviour
         }
 
         if (other.gameObject.name == "SharkObstacle") //상어 장애물에 부딫혔을때
-        {   
+        {   /*
             //이후 동일
             CollideObstacle = true;
             CanMove = false;
@@ -84,6 +76,9 @@ public class PlayerMoveForward : MonoBehaviour
             ableToMoveTime = 3f;
 
             ableToMoveTimer = ableToMoveTime;
+            */
+
+            OnDeath(); //상어 오브젝트는 즉사이기 때문에 OnDeath 함수 호출
         }
 
         if(other.gameObject.name == "SeaweedObstacle") //해초 장애물에 부딫혔을 때
@@ -102,20 +97,50 @@ public class PlayerMoveForward : MonoBehaviour
         }
     }
 
-    void MoveFunction() //기본적으로 이동하는 함수
+    void MoveFunction()
     {
-        Vector3 getVel = new Vector3(MoveSpeed, 0.0f, 0.0f); //X벡터에 MoveSpeed값 만큼 수치 적용 
+        if (CanMove) //움직일 수 있는 상태일때
+        {
+            Vector3 getVel = new Vector3(MoveSpeed, 0.0f, 0.0f); //X벡터에 MoveSpeed값 만큼 수치 적용 
 
-        _rigid.velocity = getVel;  //설정한 벡터를 리지드바디 벨로시티 벡터에 적용
+            _rigid.velocity = getVel;  //설정한 벡터를 리지드바디 벨로시티 벡터에 적용
+        }
+        else
+        {
+            _rigid.velocity = Vector3.zero;
+        }
+        
     }
 
-    void CollideMove() //충돌 시 이동하는 함수
+    void CollideMove()
     {
-        ableToMoveTimer -= Time.deltaTime; //타이머 시작
+        if (CollideObstacle) //오브젝트에 부딫혀 boolean 함수가 true 시
+        {
+            ableToMoveTimer -= Time.deltaTime; //타이머 시작
 
-        Vector3 getVel = new Vector3(CollideMoveSpeed, 0f, 0f); //충돌 오브젝트에 맞는 속도로 X벡터에 수치 적용
+            Vector3 getVel = new Vector3(CollideMoveSpeed, 0f, 0f); //충돌 오브젝트에 맞는 속도로 X벡터에 수치 적용
 
-        _rigid.velocity = getVel; //설정한 벡터를 리지드바디 벨로시티 벡터에 적용
+            _rigid.velocity = getVel; //설정한 벡터를 리지드바디 벨로시티 벡터에 적용
+        }
     }
 
+    void ResetMoveVector()
+    {
+        if (ableToMoveTimer <= 0f) //타이머가 0이 되면
+        {
+            CollideObstacle = false; //장애물 충돌 boolean 변수 끄기 
+
+            CanMove = true; //다시 움직일 수 있게 변경
+
+            _rigid.velocity = Vector3.zero; //속도를 바로 적용시키기 위해서 플레이어 리지드바디 벨로시티의 벡터값을 0,0,0으로 변경 후 
+
+            ableToMoveTimer = ableToMoveTime; //타이머 초기화
+        }
+    }
+
+    public void OnDeath()
+    {
+        Death = true;
+        CanMove = false;
+    }
 }

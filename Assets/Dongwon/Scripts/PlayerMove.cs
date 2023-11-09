@@ -16,30 +16,47 @@ public class PlayerMove : MonoBehaviour
     public bool MovePosLeft = false;
     public bool MovePosRight = false;
 
-    public bool IsNotMoving = false;
+    public bool IsNotMoving = false; //움직임이 있는지 없는지 감지하는 변수
+    public bool PlayerStatus = false; //플레이어가 Death 상태인지 아닌지 확인하는 변수
+    public bool GamePause = false; //게임이 퍼즈상태인지 아닌지 확인하는 변수
 
-    public float LerpSpeed = 0.025f;
+    public float LerpSpeed = 0.5f;
     public float RotLerpSpeed = 0.25f;
 
-    private float MoveDel = 0.35f; //움직임 쿨타임
-    private float MoveDelCurrent = 0.35f; //움직임 쿨타임 적용 변수
+    private float MoveDel = 0.15f; //움직임 쿨타임
+    private float MoveDelCurrent = 0.15f; //움직임 쿨타임 적용 변수
 
     public GameObject TrmPos;
+
+    PlayerMoveForward _moveForward;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _moveForward = FindObjectOfType<PlayerMoveForward>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckPlayerPos(); //플레이어 위치를 확인하는 함수
-        PlayerInput(); //플레이어 입력 받는 함수
-        PlayerMovement(); //플레이어 움직이게 하는 함수
+        if(!PlayerStatus) //플레이어가 죽지 않았고
+        {
+            if(!GamePause) //게임이 퍼즈상태가 아닐 때
+            {
+                MoveDelCurrent -= Time.deltaTime; //플레이어 움직임 딜레이 타이머
+                CheckPlayerPos(); //플레이어 위치를 확인하는 함수
+                PlayerInput(); //플레이어 입력 받는 함수
+                PlayerMovement(); //플레이어 움직이게 하는 함수
+            }
+        }
 
-        MoveDelCurrent -= Time.deltaTime; //플레이어 움직임 딜레이 타이머
+        PlayerStatus = _moveForward.Death;
+        GamePause = _moveForward.Pause;
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     void CheckPlayerPos()
@@ -193,12 +210,12 @@ public class PlayerMove : MonoBehaviour
             Quaternion targetRot = Quaternion.Euler(0, 90, 0); //정면을 바라보게 쿼터니언값 설정
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, RotLerpSpeed); //바라보던 방향과 설정한 쿼터니언값을 보간(Lerp)하여 회전
 
-            IsNotMoving = true;
+            IsNotMoving = true; //움직임이 없기 때문에 true로 값 변환
         }
 
         else
         {
-            IsNotMoving = false;
+            IsNotMoving = false; //아닐 경우 움직이는거기 때문에 false로 값 변환
         }
     }
 }
