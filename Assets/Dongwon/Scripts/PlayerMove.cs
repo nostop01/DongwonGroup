@@ -127,7 +127,7 @@ public class PlayerMove : MonoBehaviour
     {
         //플레이어 위치이동 입력받는 함수
         //WASD로 조작, 움직임 딜레이 있음
-        if(isPosUp == false) //플레이어 위치가 위쪽에 없을 때
+        if(!isPosUp && !MovePosDown) //플레이어 위치가 위쪽에 없을 때
         {
             if (Input.GetKeyDown(KeyCode.W) && MoveDelCurrent <= 0) //위쪽으로 이동하라는 입력을 받았고, 움직임 딜레이값이 0이라 이동이 가능할 때
             {
@@ -136,7 +136,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if(isPosDown == false) //이하 동일
+        if(!isPosDown && !MovePosUp) //이하 동일
         {
             if(Input.GetKeyDown(KeyCode.S) && MoveDelCurrent <= 0)
             {
@@ -145,7 +145,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (isPosLeft == false) //이하 동일
+        if (!isPosLeft && !MovePosRight) //이하 동일
         {
             if (Input.GetKeyDown(KeyCode.A) && MoveDelCurrent <= 0)
             {
@@ -154,7 +154,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (isPosRight == false)//이하 동일
+        if (!isPosRight && !MovePosLeft)//이하 동일
         {
             if (Input.GetKeyDown(KeyCode.D) && MoveDelCurrent <= 0)
             {

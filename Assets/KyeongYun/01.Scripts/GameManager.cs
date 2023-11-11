@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         // 게임오버 시 발생할 이벤트들
         failPanel.SetActive(true);
+        
     }
 
     public void StageClear()
