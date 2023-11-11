@@ -16,12 +16,20 @@ public class ExplainPanel : MonoBehaviour
     public string[] messages; // 원하는 텍스트 메시지를 배열로 저장
 
     private int currentTextIndex = 0;
-    private bool canShowNextText = false;
-    private float timeBetweenText = 2.0f;
-    private float timeSinceLastText = 0f;
+   [SerializeField] private bool canShowNextText = false;
+    [SerializeField] private float timeBetweenText = 2.0f;
+    [SerializeField] private float timeSinceLastText = 0f;
+    [SerializeField] private float graceTime = 0f;
 
     private void Update()
     {
+        graceTime += Time.deltaTime;
+        
+        if (graceTime >= timeBetweenText)
+        {
+            panel.SetActive(true);
+        }
+
         if (panel != null)
         {
             timeSinceLastText += Time.deltaTime;
