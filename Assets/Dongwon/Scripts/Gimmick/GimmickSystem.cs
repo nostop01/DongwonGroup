@@ -12,8 +12,6 @@ public class GimmickSystem : MonoBehaviour
     public int W_Lineidx = 0;
 
     public bool PlayerNotMoving = false; //기믹시스템 스크립트에 있는 움직임 확인 boolean 변수
-    public bool PlayerStatus = false; //플레이어 상태 받아오기
-    public bool GamePause = false; //게임이 퍼즈상태인지 받아오기 위한 변수
 
     public GameObject Player;
     public GameObject[] WarningLineTrm; //각 숫자별 위치를 받아오기 위한 리스트
@@ -39,12 +37,10 @@ public class GimmickSystem : MonoBehaviour
         SpawnWaringLineTimer -= Time.deltaTime;
 
         PlayerNotMoving = _playerMove.IsNotMoving; //플레이어 무브 스크립트의 움직임 감지 boolean 변수값을 저장
-        PlayerStatus = _moveForward.Death; //플레이어가 죽음 상태인지 아닌지 감지
-        GamePause = _moveForward.Pause; //게임이 퍼즈인지 아닌지 확인
 
-        if(!PlayerStatus) //플레이어가 Death 상태가 아닐 경우
+        if(!PlayerStatus.Instance.Death) //플레이어가 Death 상태가 아닐 경우
         {
-            if(!GamePause) //게임이 퍼즈가 아닐 경우
+            if(!PlayerStatus.Instance.Pause) //게임이 퍼즈가 아닐 경우
             {
                 PlayerTrmCheck(); //플레이어가 제자리에서 5초동안 움직이지 않을경우 동작하는 함수
                 TenSecSpawnSpear(); //10초마다 동작하는 기믹 시스템 함수

@@ -13,7 +13,7 @@ public class ClearDetect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag==("Wall"))
+        if(other.gameObject.tag==("EndLine"))
         {
             Debug.Log("Å¬¸®¾î");
             StageClear();

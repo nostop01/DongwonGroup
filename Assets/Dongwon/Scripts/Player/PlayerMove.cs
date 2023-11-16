@@ -17,8 +17,6 @@ public class PlayerMove : MonoBehaviour
     public bool MovePosRight = false;
 
     public bool IsNotMoving = false; //움직임이 있는지 없는지 감지하는 변수
-    public bool PlayerStatus = false; //플레이어가 Death 상태인지 아닌지 확인하는 변수
-    public bool GamePause = false; //게임이 퍼즈상태인지 아닌지 확인하는 변수
 
     public float LerpSpeed = 0.5f;
     public float RotLerpSpeed = 0.25f;
@@ -39,9 +37,9 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!PlayerStatus) //플레이어가 죽지 않았고
+        if(!PlayerStatus.Instance.Death) //플레이어가 죽지 않았고
         {
-            if(!GamePause) //게임이 퍼즈상태가 아닐 때
+            if(!PlayerStatus.Instance.Pause) //게임이 퍼즈상태가 아닐 때
             {
                 MoveDelCurrent -= Time.deltaTime; //플레이어 움직임 딜레이 타이머
                 CheckPlayerPos(); //플레이어 위치를 확인하는 함수
@@ -49,9 +47,6 @@ public class PlayerMove : MonoBehaviour
                 PlayerMovement(); //플레이어 움직이게 하는 함수
             }
         }
-
-        PlayerStatus = _moveForward.Death;
-        GamePause = _moveForward.Pause;
     }
 
     private void FixedUpdate()
