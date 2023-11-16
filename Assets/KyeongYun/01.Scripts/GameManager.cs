@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Button nextSceneButton;
     public GameObject clearPanel;
     public GameObject failPanel;
+    public GameState gameState;
+    public bool isTutorialCleared;
 
     private void Awake()
     {
@@ -25,6 +27,15 @@ public class GameManager : MonoBehaviour
         inGame,
         gameOver,
         gameClear,
+    }
+    public enum StageState
+    {
+        stageClear,
+        stegeUnCleared,
+    }
+    private void Start()
+    {
+
     }
     public void Update()
     {
