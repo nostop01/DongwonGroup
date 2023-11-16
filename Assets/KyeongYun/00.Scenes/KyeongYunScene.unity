@@ -592,9 +592,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainSceneName: StageSelectScene
-  nextSceneButton: {fileID: 6761275280535882889}
-  clearPanel: {fileID: 8366993320708062631}
-  failPanel: {fileID: 8447849441507033232}
+  nextSceneButton: {fileID: 2146658988}
+  clearPanel: {fileID: 661265480}
+  failPanel: {fileID: 1238781781}
+  gameState: 0
+  isTutorialCleared: 0
 --- !u!4 &239946482
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject clearPanel;
     public GameObject failPanel;
     public GameObject Player;
+    public GameState gameState;
+    
+    public bool isTutorialCleared;
 
     private void Awake()
     {
@@ -27,12 +30,21 @@ public class GameManager : MonoBehaviour
         gameOver,
         gameClear,
     }
+    public enum StageState
+    {
+        stageClear,
+        stegeUnCleared,
+    }
+    private void Start()
+    {
+
+    }
     public void Update()
     {
-        //PlayerStatus ½ºÅ©¸³Æ®¸¦ Ã£¾Æ onDeath°¡ ºÒ·¯¿ÍÁø´Ù¸é GameOver(°ÔÀÓÁ¾·á)
+        //PlayerStatus ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì•„ onDeathê°€ ë¶ˆëŸ¬ì™€ì§„ë‹¤ë©´ GameOver(ê²Œì„ì¢…ë£Œ)
         //FindObjectOfType<PlayerStatus>().onDeath += GameOver;
 
-        //PlayerStatus ½ºÅ©¸³Æ®¸¦ Ã£¾Æ StageClear ºÒ·¯¿ÍÁø´Ù¸é StageClear(°ÔÀÓÁ¾·á)
+        //PlayerStatus ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì•„ StageClear ë¶ˆëŸ¬ì™€ì§„ë‹¤ë©´ StageClear(ê²Œì„ì¢…ë£Œ)
         //FindObjectOfType<PlayerStatus>().StageClear += StageClear;
 
         if(PlayerStatus.Instance.Death)
@@ -48,25 +60,25 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // °ÔÀÓ¿À¹ö ½Ã ¹ß»ıÇÒ ÀÌº¥Æ®µé
+        // ê²Œì„ì˜¤ë²„ ì‹œ ë°œìƒí•  ì´ë²¤íŠ¸ë“¤
         failPanel.SetActive(true);
         
     }
 
     public void StageClear()
     {
-        // ½ºÅ×ÀÌÁö Å¬¸®¾î ½Ã ¹ß»ı ÀÌº¥Æ®
+        // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì‹œ ë°œìƒ ì´ë²¤íŠ¸
         clearPanel.SetActive(true);
     }
     public void SceneLoad()
     {
-        // ÇöÀç ¾ÀÀÇ ºôµå ÀÎµ¦½º¸¦ °¡Á®¿È(·¹º§ ¾À ¼ø¼­¸¸ ¿¬¼ÓÀûÀ¸·Î µÎ¸é µÉµí)
+        // í˜„ì¬ ì”¬ì˜ ë¹Œë“œ ì¸ë±ìŠ¤ë¥¼ ê°€ì ¸ì˜´(ë ˆë²¨ ì”¬ ìˆœì„œë§Œ ì—°ì†ì ìœ¼ë¡œ ë‘ë©´ ë ë“¯)
         int currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        // ´ÙÀ½ ¾ÀÀÇ ºôµå ÀÎµ¦½º¸¦ °è»êÇÏ¿© ·Îµå
+        // ë‹¤ìŒ ì”¬ì˜ ë¹Œë“œ ì¸ë±ìŠ¤ë¥¼ ê³„ì‚°í•˜ì—¬ ë¡œë“œ
         int nextSceneBuildIndex = currentSceneBuildIndex + 1;
 
-        // ¸¶Áö¸· ¾À¿¡¼­ ´õÀÌ»ó ´ÙÀ½ ¾ÀÀÌ ¾ø´Â °æ¿ì ´ÙÀ½ ½ºÅ×ÀÌÁö ¹öÆ° »ç¶óÁü
+        // ë§ˆì§€ë§‰ ì”¬ì—ì„œ ë”ì´ìƒ ë‹¤ìŒ ì”¬ì´ ì—†ëŠ” ê²½ìš° ë‹¤ìŒ ìŠ¤í…Œì´ì§€ ë²„íŠ¼ ì‚¬ë¼ì§
         if (nextSceneBuildIndex >= SceneManager.sceneCountInBuildSettings)
         {
             nextSceneButton.enabled = false;
@@ -74,9 +86,9 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(nextSceneBuildIndex);
     }
-    public void SceneRetry() // ÇöÀç ¾À ÀçµµÀü ½Ã ´Ù½Ã ºÒ·¯¿À±â
+    public void SceneRetry() // í˜„ì¬ ì”¬ ì¬ë„ì „ ì‹œ ë‹¤ì‹œ ë¶ˆëŸ¬ì˜¤ê¸°
     {
-        // ÇöÀç ¾ÀÀÇ ºôµå ÀÎµ¦½º¸¦ °¡Á®¿È
+        // í˜„ì¬ ì”¬ì˜ ë¹Œë“œ ì¸ë±ìŠ¤ë¥¼ ê°€ì ¸ì˜´
         int currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneBuildIndex);
     }

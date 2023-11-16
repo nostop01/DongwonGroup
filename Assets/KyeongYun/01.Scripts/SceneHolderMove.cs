@@ -2,12 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Data;
 using UnityEngine.SubsystemsImplementation;
+using UnityEngine.SceneManagement;
 
 public class SceneHolderMove : MonoBehaviour
 {
     private Vector3 originalPosition;
     public GameObject destroyPanel;
-    public GameObject tutorialPanel;
+    public string tutorialScene;
     public float moveInterval = 2.0f; // 각 장면마다 대기할 시간
     public float lerpSpeed = 1.0f;
 
@@ -44,7 +45,7 @@ public class SceneHolderMove : MonoBehaviour
 
             Destroy(destroyPanel);
 
-            tutorialPanel.SetActive(true);
+            SceneManager.LoadScene(tutorialScene);
             
         }
     }

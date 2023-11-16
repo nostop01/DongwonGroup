@@ -15,7 +15,7 @@ public class ClearDetect : MonoBehaviour
     {
         if(other.gameObject.tag==("EndLine"))
         {
-            Debug.Log("Å¬¸®¾î");
+            Debug.Log("Ã…Â¬Â¸Â®Â¾Ã®");
             StageClear();
         }
     }
