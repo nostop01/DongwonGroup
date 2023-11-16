@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6820073493415976293}
   - component: {fileID: 7586740312912010657}
   - component: {fileID: 4193264877375352038}
-  - component: {fileID: 5537312830936734721}
   - component: {fileID: 4319872949961784651}
+  - component: {fileID: 8385138789021707304}
   m_Layer: 30
   m_Name: SharkObstacle
   m_TagString: Untagged
@@ -107,23 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5537312830936734721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143270192452579677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27b2401776b2e048b03c2587bb0b2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StoneHitMoveSpeed: 4.5
-  SharkHitMoveSpeed: 4.25
-  SeaweedHitMoveSpeed: 3.75
-  SharkObstacleMoveSpeed: 2.5
-  SharkObstacle: 1
 --- !u!54 &4319872949961784651
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8385138789021707304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143270192452579677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6a26593251b7440b7d4e68d84b0287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
