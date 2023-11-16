@@ -8,6 +8,7 @@ public class ChasetMovement : MonoBehaviour
     public float MoveSpeed = 4.5f;
 
     public bool GamePause = false;
+    public bool PlayerDeath = false;
 
     public GameObject Player;
 
@@ -25,19 +26,27 @@ public class ChasetMovement : MonoBehaviour
     void Update()
     {
         GamePause = _moveForward.Pause;
+        PlayerDeath = _moveForward.Death;
 
         ChaserMove();
     }
 
     void ChaserMove()
     {
-        if (!GamePause)
+        if (!GamePause && !PlayerDeath)
         {
             Vector3 getVel = new Vector3(MoveSpeed, 0,0);
 
             _rigid.velocity = getVel;
 
             transform.position = new Vector3(transform.position.x, Player.transform.position.y, Player.transform.position.z);
+        }
+
+        else if(PlayerDeath)
+        {
+            Vector3 getVel = Vector3.zero;
+
+            _rigid.velocity = getVel;
         }
     }
 }

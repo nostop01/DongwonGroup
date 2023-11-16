@@ -9,6 +9,9 @@ public class PlayerMoveForward : MonoBehaviour
     public float ableToMoveTimer = 0f; //원래 속도로 돌아가는 타이머
     public float ableToMoveTime = 2f; //타이머 기준
 
+    private float Timer;
+    private float Times = 2;
+
     public bool CanMove = true; //게임오버가 아닐 때, 게임이 끝나지 않았을 때 움직이도록 하는 변수
     public bool CollideObstacle = false; //오브젝트에 부딫혔는지 아닌지 확인하는 boolean변수
     public bool Death = false; //플레이어 상태 확인하는 변수
@@ -17,12 +20,14 @@ public class PlayerMoveForward : MonoBehaviour
     public Rigidbody _rigid;
 
     ObstacleSystem _obstacleSystem; //장애물 별 감소하는 속도 받아오기
+    GameManager _gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _rigid = GetComponent<Rigidbody>();
+        _gameManager = FindObjectOfType<GameManager>();
         _obstacleSystem = FindObjectOfType<ObstacleSystem>(); //ObstacleSystem 보유한 오브젝트 찾기
 
         ableToMoveTimer = ableToMoveTime; //시작 타이머 설정
@@ -38,6 +43,20 @@ public class PlayerMoveForward : MonoBehaviour
                 MoveFunction();  //기본적으로 이동하는 함수
                 CollideMove(); //충돌 시 이동하는 함수
                 ResetMoveVector(); //움직임 벡터 초기화하는 함수
+            }
+        }
+
+        else if(Death)
+        {
+            Timer = Times;
+            Timer -= Time.deltaTime;
+
+            if (Timer <= 0)
+            {
+                Debug.Log("플레이어 죽음");
+                //_gameManager.gameState == gameOver;
+                _gameManager.GameOver();
+                
             }
         }
     }
