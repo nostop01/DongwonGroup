@@ -15,6 +15,6 @@ public class Score : MonoBehaviour
 
     void Update()
     {
-        text.text = coinAmount.ToString(); ;
+        text.text = coinAmount.ToString();
     }
 }

@@ -33,7 +33,7 @@ public class DataManager : MonoBehaviour
 
     public Data data = new Data();
 
-    public void LoadGameData() //µ¥ÀÌÅÍ ºÒ·¯¿À±â
+    public void LoadGameData() //ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
     {
         string filePath = Application.persistentDataPath + "/" + GameDataFileName;
 
@@ -44,54 +44,54 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void SaveStageClearData() //½ºÅ×ÀÌÁö Å¬¸®¾î ¿©ºÎ µ¥ÀÌÅÍ ÀúÀåÇÏ±â
+    public void SaveStageClearData() //ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì—¬ë¶€ ë°ì´í„° ì €ì¥í•˜ê¸°
     {
-        // Å¬·¡½º¸¦ Json Çü½ÄÀ¸·Î ÀüÈ¯ (true : °¡µ¶¼º ÁÁ°Ô ÀÛ¼º)
+        // í´ë˜ìŠ¤ë¥¼ Json í˜•ì‹ìœ¼ë¡œ ì „í™˜ (true : ê°€ë…ì„± ì¢‹ê²Œ ì‘ì„±)
         string ToJsonData = JsonUtility.ToJson(data, true);
         string filePath = Application.persistentDataPath + "/" + GameDataFileName;
 
-        // ÀÌ¹Ì ÀúÀåµÈ ÆÄÀÏÀÌ ÀÖ´Ù¸é µ¤¾î¾²°í, ¾ø´Ù¸é »õ·Î ¸¸µé¾î¼­ ÀúÀå
+        // ì´ë¯¸ ì €ì¥ëœ íŒŒì¼ì´ ìˆë‹¤ë©´ ë®ì–´ì“°ê³ , ì—†ë‹¤ë©´ ìƒˆë¡œ ë§Œë“¤ì–´ì„œ ì €ì¥
         File.WriteAllText(filePath, ToJsonData);
 
-        // ¿Ã¹Ù¸£°Ô ÀúÀåµÆ´ÂÁö È®ÀÎ (ÀÚÀ¯·Ó°Ô º¯Çü)
-        print("ÀúÀå ¿Ï·á");
+        // ì˜¬ë°”ë¥´ê²Œ ì €ì¥ëëŠ”ì§€ í™•ì¸ (ììœ ë¡­ê²Œ ë³€í˜•)
+        print("ì €ì¥ ì™„ë£Œ");
         for (int i = 0; i < data.isUnlock.Length; i++)
         {
-            print($"{i}¹ø Ã©ÅÍ Àá±İ ÇØÁ¦ ¿©ºÎ : " + data.isUnlock[i]);
+            print($"{i}ë²ˆ ì±•í„° ì ê¸ˆ í•´ì œ ì—¬ë¶€ : " + data.isUnlock[i]);
         }
     }
 
-    public void SaveSettingData(float[] Setting) //¼¼ÆÃ µ¥ÀÌÅÍ ÀúÀåÇÏ±â
+    public void SaveSettingData(float[] Setting) //ì„¸íŒ… ë°ì´í„° ì €ì¥í•˜ê¸°
     {
-        // Å¬·¡½º¸¦ Json Çü½ÄÀ¸·Î ÀüÈ¯ (true : °¡µ¶¼º ÁÁ°Ô ÀÛ¼º)
+        // í´ë˜ìŠ¤ë¥¼ Json í˜•ì‹ìœ¼ë¡œ ì „í™˜ (true : ê°€ë…ì„± ì¢‹ê²Œ ì‘ì„±)
         string ToJsonData = JsonUtility.ToJson(data, true);
         string filePath = Application.persistentDataPath + "/" + GameDataFileName;
 
-        // ÀÌ¹Ì ÀúÀåµÈ ÆÄÀÏÀÌ ÀÖ´Ù¸é µ¤¾î¾²°í, ¾ø´Ù¸é »õ·Î ¸¸µé¾î¼­ ÀúÀå
+        // ì´ë¯¸ ì €ì¥ëœ íŒŒì¼ì´ ìˆë‹¤ë©´ ë®ì–´ì“°ê³ , ì—†ë‹¤ë©´ ìƒˆë¡œ ë§Œë“¤ì–´ì„œ ì €ì¥
         File.WriteAllText(filePath, ToJsonData);
 
-        // ¿Ã¹Ù¸£°Ô ÀúÀåµÆ´ÂÁö È®ÀÎ (ÀÚÀ¯·Ó°Ô º¯Çü)
-        print("ÀúÀå ¿Ï·á");
+        // ì˜¬ë°”ë¥´ê²Œ ì €ì¥ëëŠ”ì§€ í™•ì¸ (ììœ ë¡­ê²Œ ë³€í˜•)
+        print("ì €ì¥ ì™„ë£Œ");
         for (int i = 0; i < data.SettingState.Length; i++)
         {
             Setting[i] = data.SettingState[i];
         }
     }
 
-    public void SaveCoinData(int CointAmount) //ÇöÀç ÄÚÀÎ ¼ö ÀúÀåÇÏ±â
+    public void SaveCoinData(int coinAmount) //í˜„ì¬ ì½”ì¸ ìˆ˜ ì €ì¥í•˜ê¸°
     {
-        // Å¬·¡½º¸¦ Json Çü½ÄÀ¸·Î ÀüÈ¯ (true : °¡µ¶¼º ÁÁ°Ô ÀÛ¼º)
+        // í´ë˜ìŠ¤ë¥¼ Json í˜•ì‹ìœ¼ë¡œ ì „í™˜ (true : ê°€ë…ì„± ì¢‹ê²Œ ì‘ì„±)
         string ToJsonData = JsonUtility.ToJson(data, true);
         string filePath = Application.persistentDataPath + "/" + GameDataFileName;
 
-        // ÀÌ¹Ì ÀúÀåµÈ ÆÄÀÏÀÌ ÀÖ´Ù¸é µ¤¾î¾²°í, ¾ø´Ù¸é »õ·Î ¸¸µé¾î¼­ ÀúÀå
+        // ì´ë¯¸ ì €ì¥ëœ íŒŒì¼ì´ ìˆë‹¤ë©´ ë®ì–´ì“°ê³ , ì—†ë‹¤ë©´ ìƒˆë¡œ ë§Œë“¤ì–´ì„œ ì €ì¥
         File.WriteAllText(filePath, ToJsonData);
 
-        // ¿Ã¹Ù¸£°Ô ÀúÀåµÆ´ÂÁö È®ÀÎ (ÀÚÀ¯·Ó°Ô º¯Çü)
-        print("ÀúÀå ¿Ï·á");
+        // ì˜¬ë°”ë¥´ê²Œ ì €ì¥ëëŠ”ì§€ í™•ì¸ (ììœ ë¡­ê²Œ ë³€í˜•)
+        print("ì €ì¥ ì™„ë£Œ");
         for (int i = 0; i < data.CointCount.Length; i++)
         {
-            data.CointCount[i] = CointAmount;
+            data.CointCount[i] = coinAmount;
         }
     }
 }

@@ -595,6 +595,7 @@ MonoBehaviour:
   nextSceneButton: {fileID: 2146658988}
   clearPanel: {fileID: 661265480}
   failPanel: {fileID: 1238781781}
+  Player: {fileID: 0}
   gameState: 0
   isTutorialCleared: 0
 --- !u!4 &239946482

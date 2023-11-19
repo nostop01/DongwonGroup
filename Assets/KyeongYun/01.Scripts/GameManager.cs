@@ -62,13 +62,14 @@ public class GameManager : MonoBehaviour
     {
         // 게임오버 시 발생할 이벤트들
         failPanel.SetActive(true);
-        
+        DataManager.Instance.SaveCoinData(Score.coinAmount);
     }
 
     public void StageClear()
     {
         // 스테이지 클리어 시 발생 이벤트
         clearPanel.SetActive(true);
+        DataManager.Instance.SaveCoinData(Score.coinAmount);
     }
     public void SceneLoad()
     {
