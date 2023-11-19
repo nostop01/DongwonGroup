@@ -5,10 +5,10 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Coin : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         Score.coinAmount += 1;
+        //SFX.SoundPlay();
         Destroy(gameObject);
-        SFX.SoundPlay();
     }
 }
