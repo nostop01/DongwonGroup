@@ -11,5 +11,5 @@ public class Data //원하는 데이터/데이터 형식/갯수 등으로 저장.
 
     public float[] SettingState = new float[3]; //설정값 저장
 
-    public float[] CointCount = new float[1]; //코인 갯수 저장
+    public int[] CointCount = new int[1]; //코인 갯수 저장
 }
