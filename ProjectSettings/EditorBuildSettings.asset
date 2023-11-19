@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/KyeongYun/00.Scenes/StageSelectScene.unity
     guid: 0d2cb037b644fc34b8cd7d528e45b1cc
   - enabled: 1
-    path: Assets/KyeongYun/00.Scenes/level1.unity
+    path: Assets/KyeongYun/00.Scenes/Level1.unity
     guid: 56fed97a75828ea46af0d5cbe1e18846
   - enabled: 1
     path: Assets/KyeongYun/00.Scenes/PlayingTutorial.unity
