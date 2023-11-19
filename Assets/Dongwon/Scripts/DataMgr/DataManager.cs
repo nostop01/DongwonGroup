@@ -78,7 +78,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void SaveCoinData() //현재 코인 수 저장하기
+    public void SaveCoinData(int CointAmount) //현재 코인 수 저장하기
     {
         // 클래스를 Json 형식으로 전환 (true : 가독성 좋게 작성)
         string ToJsonData = JsonUtility.ToJson(data, true);
@@ -91,7 +91,7 @@ public class DataManager : MonoBehaviour
         print("저장 완료");
         for (int i = 0; i < data.CointCount.Length; i++)
         {
-            print($"{i}번 세팅 저장 완료 " + data.CointCount[i]);
+            data.CointCount[i] = CointAmount;
         }
     }
 }
