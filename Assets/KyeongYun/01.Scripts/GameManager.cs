@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject clearPanel;
     public GameObject failPanel;
     public GameObject Player;
+    public GameObject AnnouncePanel;
     public GameState gameState;
     
     public bool isTutorialCleared;
@@ -96,5 +97,10 @@ public class GameManager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene(mainSceneName);
+    }
+
+    public void WaitNextUpdate()
+    {
+        AnnouncePanel.SetActive(true);
     }
 }

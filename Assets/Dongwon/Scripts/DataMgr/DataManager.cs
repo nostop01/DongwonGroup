@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour
             {
                 container = new GameObject();
                 container.name = "DataManager";
-                instance= container.AddComponent(typeof(DataManager)) as DataManager;
+                instance = container.AddComponent(typeof(DataManager)) as DataManager;
                 DontDestroyOnLoad(container);
             }
 
@@ -74,7 +74,7 @@ public class DataManager : MonoBehaviour
         print("저장 완료");
         for (int i = 0; i < data.SettingState.Length; i++)
         {
-            Setting[i] = data.SettingState[i];
+            data.SettingState[i] = (float)Setting[i];
         }
     }
 
