@@ -40,7 +40,7 @@ public class GimmickSystem : MonoBehaviour
 
         if(!PlayerStatus.Instance.Death) //플레이어가 Death 상태가 아닐 경우
         {
-            if(!PlayerStatus.Instance.Pause) //게임이 퍼즈가 아닐 경우
+            if(!PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Clear) //게임이 퍼즈가 아닐 경우
             {
                 PlayerTrmCheck(); //플레이어가 제자리에서 5초동안 움직이지 않을경우 동작하는 함수
                 TenSecSpawnSpear(); //10초마다 동작하는 기믹 시스템 함수
