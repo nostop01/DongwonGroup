@@ -26,17 +26,17 @@ public class PlayerMoveForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause)
+        if(PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Clear)
         {
             MoveFunction();
         }
 
-        if(!PlayerStatus.Instance.CanMove && PlayerStatus.Instance.CollideObstacle && !PlayerStatus.Instance.Pause)
+        if(!PlayerStatus.Instance.CanMove && PlayerStatus.Instance.CollideObstacle && !PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Clear)
         {
             CollideMove();
         }
 
-        if(!PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause)
+        if(!PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Clear)
         {
             GoTimer();
         }
@@ -49,6 +49,11 @@ public class PlayerMoveForward : MonoBehaviour
         if(PlayerStatus.Instance.Death)
         {
             _rigid.velocity = Vector3.zero;
+        }
+
+        if(PlayerStatus.Instance.Clear)
+        {
+            Destroy(gameObject);
         }
     }
 

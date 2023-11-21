@@ -24,21 +24,11 @@ public class PopupSetting : MonoBehaviour
         Panel.SetActive(false);
 
         DataManager.Instance.LoadGameData();
-
-        for (int i = 0; i < 3; i++)
-        {
-            slider[i].value = data.SettingState[i];
-        }
     }
 
     private void Awake()
     {
         DataManager.Instance.LoadGameData();
-
-        for (int i = 0; i < 3; i++)
-        {
-            slider[i].value = data.SettingState[i];
-        }
     }
 
     private void Update()

@@ -27,7 +27,7 @@ public class ChasetMovement : MonoBehaviour
 
     void ChaserMove()
     {
-        if (!PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Death)
+        if (!PlayerStatus.Instance.Pause && !PlayerStatus.Instance.Death && !PlayerStatus.Instance.Clear)
         {
             Vector3 getVel = new Vector3(MoveSpeed, 0,0);
 
