@@ -20,7 +20,7 @@ public class PlayParticle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player") //만약 플레이어란 이름을 가진 오브젝트에 충돌 시
+        if (other.gameObject.tag == "Player") //만약 플레이어란 이름을 가진 오브젝트에 충돌 시
         {
             _particleSystem.Play();
         }
