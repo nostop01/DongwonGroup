@@ -54,7 +54,7 @@ public class PlayerMoveForward : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == ("StoneObstacle"))
+        if (other.gameObject.tag == ("StoneObstacle"))
         {
             PlayerStatus.Instance.CanMove = false;
 
@@ -65,12 +65,12 @@ public class PlayerMoveForward : MonoBehaviour
             Knockback();
         }
 
-        if(other.gameObject.name == ("SharkObstacle"))
+        if(other.gameObject.tag == ("SharkObstacle"))
         {
             OnDeath();
         }
 
-        if(other.gameObject.name == ("SeaweedObstacle"))
+        if(other.gameObject.tag == ("SeaweedObstacle"))
         {
             PlayerStatus.Instance.CanMove = false;
 
@@ -81,7 +81,12 @@ public class PlayerMoveForward : MonoBehaviour
             Knockback();
         }
 
-        if(other.gameObject.name == ("EndLine"))
+        if(other.gameObject.tag == ("Chaser"))
+        {
+            OnDeath();
+        }
+
+        if(other.gameObject.tag == ("EndLine"))
         {
             StartCoroutine(WaitTimer(0.5f));
 

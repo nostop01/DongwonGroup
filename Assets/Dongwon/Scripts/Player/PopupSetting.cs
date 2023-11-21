@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -22,6 +23,16 @@ public class PopupSetting : MonoBehaviour
         PlayerStatus.Instance.Pause = true;
         Panel.SetActive(false);
 
+        DataManager.Instance.LoadGameData();
+
+        for (int i = 0; i < 3; i++)
+        {
+            slider[i].value = data.SettingState[i];
+        }
+    }
+
+    private void Awake()
+    {
         DataManager.Instance.LoadGameData();
 
         for (int i = 0; i < 3; i++)

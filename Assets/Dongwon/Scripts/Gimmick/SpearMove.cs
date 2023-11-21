@@ -40,7 +40,7 @@ public class SpearMove : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Player") //플레이어 이름을 가진 오브젝트와 부딫힐 때
+        if(other.gameObject.tag == "Player") //플레이어 이름을 가진 오브젝트와 부딫힐 때
         {
             PlayerStatus.Instance.OnDeath();
             _moveForward._rigid.velocity = Vector3.zero;
