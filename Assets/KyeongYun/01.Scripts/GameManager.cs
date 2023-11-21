@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject clearPanel;
     public GameObject failPanel;
     public GameObject Player;
+    public GameObject AnnouncePanel;
     public GameState gameState;
-    
+
     public bool isTutorialCleared;
 
     private void Awake()
@@ -47,12 +48,12 @@ public class GameManager : MonoBehaviour
         //PlayerStatus 스크립트를 찾아 StageClear 불러와진다면 StageClear(게임종료)
         //FindObjectOfType<PlayerStatus>().StageClear += StageClear;
 
-        if(PlayerStatus.Instance.Death)
+        if (PlayerStatus.Instance.Death)
         {
             GameOver();
         }
 
-        if(PlayerStatus.Instance.Clear)
+        if (PlayerStatus.Instance.Clear)
         {
             StageClear();
         }
