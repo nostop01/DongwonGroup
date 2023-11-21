@@ -7,7 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     public void SceneMove()
-    {  
+    {
         SceneManager.LoadScene(sceneName);
     }
 

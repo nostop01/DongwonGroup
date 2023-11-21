@@ -18,7 +18,7 @@ public class PlayerStatus : MonoBehaviour
 
     GameManager gameManager;
 
-    static PlayerStatus instance;
+    private static PlayerStatus instance;
 
     private void Awake()
     {

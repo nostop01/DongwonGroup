@@ -1579,8 +1579,7 @@ AudioSource:
   m_GameObject: {fileID: 1147066632}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7310345647608820279, guid: 2f8775d411947a04abd593813b4e2ba1,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9f35106e76c6c40fa9c9e04a7cd7dca6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1931,21 +1930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd69b47d9d2d64641a25c8ac014e6c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliders:
-  - {fileID: 2731266194010709667}
-  - {fileID: 5857019069024857655}
-  - {fileID: 3182878544739090695}
-  Value:
-  - 0
-  - 0
-  - 0
-  data:
-    isUnlock: 0000000000000000
-    SettingState:
-    - 0
-    - 0
-    - 0
-    CointCount: 00000000
   popup: {fileID: 707458105}
 --- !u!1 &1340096623
 GameObject:
@@ -2230,7 +2214,6 @@ GameObject:
   - component: {fileID: 1573151497}
   - component: {fileID: 1573151496}
   - component: {fileID: 1573151495}
-  - component: {fileID: 1573151501}
   m_Layer: 5
   m_Name: Load Button
   m_TagString: Untagged
@@ -2288,8 +2271,7 @@ AudioSource:
   m_GameObject: {fileID: 1573151493}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7310345647608820279, guid: 2f8775d411947a04abd593813b4e2ba1,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9f35106e76c6c40fa9c9e04a7cd7dca6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2447,18 +2429,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1573151501}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: SceneMove
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1573151500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,19 +2459,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
---- !u!114 &1573151501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573151493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3243ef86c745696489bfd9309474433b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: StageSelectScene
 --- !u!1 &1755508126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +2594,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755508126}
   m_CullTransparentMesh: 1
+--- !u!1 &1774197294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774197296}
+  - component: {fileID: 1774197295}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1774197295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774197294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa14ed1abc4ae284c88f458abdc434db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    isUnlock: 0000000000000000
+    SettingState:
+    - 0
+    - 0
+    - 0
+    CointCount:
+    - 0
+--- !u!4 &1774197296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774197294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.0443144, y: 0.9235577, z: 5.448983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1824612944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4816,7 +4825,6 @@ GameObject:
   - component: {fileID: 3126554321205638575}
   - component: {fileID: 8584370160360275339}
   - component: {fileID: 6463223674302966971}
-  - component: {fileID: 8584370160360275340}
   m_Layer: 5
   m_Name: New Game Button
   m_TagString: Untagged
@@ -5502,8 +5510,7 @@ AudioSource:
   m_GameObject: {fileID: 1508274979377977645}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7310345647608820279, guid: 2f8775d411947a04abd593813b4e2ba1,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9f35106e76c6c40fa9c9e04a7cd7dca6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7172,18 +7179,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8584370160360275340}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: SceneMove
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!222 &6254877075563755563
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8188,19 +8183,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508274979377977645}
   m_CullTransparentMesh: 0
---- !u!114 &8584370160360275340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508274979377977645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3243ef86c745696489bfd9309474433b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: TutorialScene
 --- !u!114 &8654324628622645674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8482,3 +8464,4 @@ SceneRoots:
   - {fileID: 871469007}
   - {fileID: 6936144883795701894}
   - {fileID: 3573117436262459975}
+  - {fileID: 1774197296}

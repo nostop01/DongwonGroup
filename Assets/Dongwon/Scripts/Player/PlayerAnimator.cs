@@ -15,7 +15,7 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerStatus.Instance.Death)
+        if(PlayerStatus.Instance.Pause || PlayerStatus.Instance.Death)
         {
             OnDeathAnimation();
         }
