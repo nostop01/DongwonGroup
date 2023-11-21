@@ -9,9 +9,6 @@ public class PlayerMoveForward : MonoBehaviour
     public float ableToMoveTimer = 0f; //원래 속도로 돌아가는 타이머
     public float ableToMoveTime = 2f; //타이머 기준
 
-    private float Timer;
-    private float Times = 2;
-
     public Rigidbody _rigid;
 
     GameManager _gameManager;
@@ -34,10 +31,19 @@ public class PlayerMoveForward : MonoBehaviour
             MoveFunction();
         }
 
-        if(!PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause)
+        if(!PlayerStatus.Instance.CanMove && PlayerStatus.Instance.CollideObstacle && !PlayerStatus.Instance.Pause)
         {
             CollideMove();
+        }
+
+        if(!PlayerStatus.Instance.CanMove && !PlayerStatus.Instance.Pause)
+        {
             GoTimer();
+        }
+
+        if(PlayerStatus.Instance.Pause)
+        {
+            _rigid.velocity = Vector3.zero;
         }
 
         if(PlayerStatus.Instance.Death)
@@ -50,12 +56,13 @@ public class PlayerMoveForward : MonoBehaviour
     {
         if (other.gameObject.name == ("StoneObstacle"))
         {
-            PlayerStatus.Instance.CollideObstacle = true;
             PlayerStatus.Instance.CanMove = false;
 
             CollideMoveSpeed = ObstacleSystem.Instance.StoneHitMoveSpeed;
 
             _rigid.velocity = Vector3.zero;
+
+            Knockback();
         }
 
         if(other.gameObject.name == ("SharkObstacle"))
@@ -65,12 +72,13 @@ public class PlayerMoveForward : MonoBehaviour
 
         if(other.gameObject.name == ("SeaweedObstacle"))
         {
-            PlayerStatus.Instance.CollideObstacle = true;
             PlayerStatus.Instance.CanMove = false;
 
             CollideMoveSpeed = ObstacleSystem.Instance.SeaweedHitMoveSpeed;
 
             _rigid.velocity = Vector3.zero;
+
+            Knockback();
         }
 
         if(other.gameObject.name == ("EndLine"))
@@ -97,12 +105,6 @@ public class PlayerMoveForward : MonoBehaviour
         Vector3 getVel = new Vector3(CollideMoveSpeed, 0f, 0f); //충돌 오브젝트에 맞는 속도로 X벡터에 수치 적용
 
         _rigid.velocity = getVel; //설정한 벡터를 리지드바디 벨로시티 벡터에 적용
-
-        if (ableToMoveTimer <= 0)
-        {
-            PlayerStatus.Instance.CollideObstacle = false;
-            PlayerStatus.Instance.CanMove = true;
-        }
     }
 
     public void OnDeath()
@@ -114,10 +116,26 @@ public class PlayerMoveForward : MonoBehaviour
     void GoTimer()
     {
         ableToMoveTimer -= Time.deltaTime;
+
+        if (ableToMoveTimer <= 0)
+        {
+            PlayerStatus.Instance.CollideObstacle = false;
+            PlayerStatus.Instance.CanMove = true;
+
+            ableToMoveTimer = ableToMoveTime;
+        }
     }
 
     IEnumerator WaitTimer(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
+    }
+
+    void Knockback()
+    {
+        Vector3 getVel = new Vector3(-1.5f, 0, 0);
+        _rigid.AddForce(getVel, ForceMode.Impulse);
+
+        ableToMoveTimer = 0.5f; 
     }
 }

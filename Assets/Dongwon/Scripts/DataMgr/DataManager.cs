@@ -74,7 +74,7 @@ public class DataManager : MonoBehaviour
         print("저장 완료");
         for (int i = 0; i < data.SettingState.Length; i++)
         {
-            Setting[i] = data.SettingState[i];
+            data.SettingState[i] = Setting[i];
         }
     }
 

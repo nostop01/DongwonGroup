@@ -7,8 +7,11 @@ public class Coin : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collision)
     {
-        Score.coinAmount += 1;
-        //SFX.SoundPlay();
-        Destroy(gameObject);
+        if(collision.gameObject.name == "Player")
+        {
+            Score.coinAmount += 1;
+            //SFX.SoundPlay();
+            Destroy(gameObject);
+        }
     }
 }
