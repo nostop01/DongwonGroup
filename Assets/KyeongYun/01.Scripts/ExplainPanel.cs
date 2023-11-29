@@ -19,20 +19,15 @@ public class ExplainPanel : MonoBehaviour
     [SerializeField] private bool canShowNextText = false;
     [SerializeField] private float timeBetweenText = 2.0f;
     [SerializeField] private float timeSinceLastText = 0f;
-    [SerializeField] private float graceTime = 0f;
 
     private void Update()
     {
-        graceTime += Time.deltaTime;
-        
-        if (graceTime >= timeBetweenText)
-        {
-            panel.SetActive(true);
-        }
-
         if (panel != null)
         {
-            timeSinceLastText += Time.deltaTime;
+            if(panel.activeSelf == true)
+            {
+                timeSinceLastText += Time.deltaTime;
+            }
 
             if (timeSinceLastText >= timeBetweenText)
             {
@@ -43,10 +38,34 @@ public class ExplainPanel : MonoBehaviour
             if (canShowNextText && Input.GetKeyDown(KeyCode.Space))
             {
                 // 스페이스 바를 눌렀을 때 다음 텍스트로 이동
-                ShowNextText();
+
+                if (currentTextIndex < messages.Length)
+                {
+                    ShowNextText();
+                }
+                else
+                {
+                    // 모든 텍스트를 출력했을 때 원하는 함수 호출
+                    OnAllTextsDisplayed();
+                }
+
                 // 텍스트 지우기
                 continueText.text = "";
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == ("DetectCollider"))
+        {
+            panel.SetActive(true);
+            PlayerStatus.Instance.Pause = true;
+        }
+
+        if(other.gameObject.tag == ("EndLine"))
+        {
+            SceneManager.LoadScene(sceneName);
         }
     }
 
@@ -54,26 +73,18 @@ public class ExplainPanel : MonoBehaviour
     {
         textComponent.text = "";
 
-        if (currentTextIndex < messages.Length)
-        {
-            // 다음 텍스트를 출력
-            textComponent.text = messages[currentTextIndex];
-            currentTextIndex++;
+        // 다음 텍스트를 출력
+        textComponent.text = messages[currentTextIndex];
+        ++currentTextIndex;
 
-            canShowNextText = false;
-            timeSinceLastText = 0f;
-        }
-        else
-        {
-            // 모든 텍스트를 출력했을 때 원하는 함수 호출
-            OnAllTextsDisplayed();
-        }
+        timeSinceLastText = 0;
+        canShowNextText = false;
     }
 
     public void OnAllTextsDisplayed()
     {
         Destroy(panel);
         enabled = false;
-        SceneManager.LoadScene(sceneName);
+        PlayerStatus.Instance.Pause = false;
     }
 }

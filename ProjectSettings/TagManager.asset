@@ -9,6 +9,8 @@ TagManager:
   - SharkObstacle
   - SeaweedObstacle
   - Chaser
+  - DetectCollider
+  - EndLine
   layers:
   - Default
   - TransparentFX
@@ -45,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 1255274045
     locked: 0
